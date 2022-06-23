@@ -1,0 +1,67 @@
+@import url("https://fonts.googleapis.com/css2?family=Encode+Sans:wght@100;200;300;400;500;600;700&family=Righteous&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+    width: 614px;
+    background-color: #E5E5E5;
+    font-family: "Roboto", sans-serif;
+}
+
+.topo, .digitar-msg {
+    width: 614px;
+    height: 80px;
+    background-color: #FFFFFF;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+.digitar-msg {
+    font-style: italic;
+    position: fixed;
+    bottom: 0;
+}
+
+.topo {
+    position:  fixed;
+    top: 0;
+}
+
+.logo {
+    width: 75px; 
+}
+
+ion-icon {
+    font-size: 40px;
+}
+
+.mensagens {
+    width: 614px;
+    margin-top: 120px;
+    margin-bottom: 120px;
+}
+
+.msg-status {
+    background-color: #DCDCDC;
+    margin-bottom: 5px;
+    height: auto;
+}
+
+.msg-reservada {
+    background-color: #FFDEDE;
+    margin-bottom: 5px;
+    height: auto;
+}
+
+.msg-normal {
+    background-color: #FFFFFF;
+    margin-bottom: 5px;
+    height: auto;
+}
+
+
+
