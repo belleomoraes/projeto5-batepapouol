@@ -5,63 +5,105 @@
 }
 
 body {
-    width: 614px;
-    background-color: #E5E5E5;
-    font-family: "Roboto", sans-serif;
+  width: 614px;
+  background-color: #e5e5e5;
+  font-family: "Roboto", sans-serif;
 }
 
-.topo, .digitar-msg {
-    width: 614px;
-    height: 80px;
-    background-color: #FFFFFF;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.05);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
+.telaEntrada {
+  background-color: #ffffff;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.telaEntrada img {
+  width: 120px;
+}
+
+.telaEntrada .logo {
+  margin-top: 72px;
+}
+
+.digitar input {
+  width: 261px;
+  height: 54px;
+  margin-top: 258px;
+  border-radius: 4px;
+  border: 1px solid #d7d7d7;
+  text-align: center;
+  color: #696969;
+}
+
+.digitar-msg input {
+  font-style: italic;
+}
+.entrar {
+  width: 109px;
+  height: 45px;
+  border-radius: 9px;
+  background-color: #e7e7e7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 60%;
+}
+.topo,
+.digitar-msg {
+  width: 614px;
+  height: 80px;
+  background-color: #ffffff;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
 }
 .digitar-msg {
-    font-style: italic;
-    position: fixed;
-    bottom: 0;
+  position: fixed;
+  bottom: 0;
 }
 
 .topo {
-    position:  fixed;
-    top: 0;
+  position: fixed;
+  top: 0;
 }
 
 .logo {
-    width: 75px; 
+  width: 75px;
 }
 
 ion-icon {
-    font-size: 40px;
+  font-size: 40px;
 }
 
 .mensagens {
-    width: 614px;
-    margin-top: 120px;
-    margin-bottom: 120px;
+  width: 614px;
+  margin-top: 120px;
+  margin-bottom: 120px;
 }
 
 .msg-status {
-    background-color: #DCDCDC;
-    margin-bottom: 5px;
-    height: auto;
+  background-color: #dcdcdc;
+  margin-bottom: 5px;
+  height: auto;
 }
 
 .msg-reservada {
-    background-color: #FFDEDE;
-    margin-bottom: 5px;
-    height: auto;
+  background-color: #ffdede;
+  margin-bottom: 5px;
+  height: auto;
 }
 
 .msg-normal {
-    background-color: #FFFFFF;
-    margin-bottom: 5px;
-    height: auto;
+  background-color: #ffffff;
+  margin-bottom: 5px;
+  height: auto;
 }
 
-
-
+.escondido {
+  display: none;
+}
