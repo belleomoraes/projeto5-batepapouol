@@ -33,7 +33,7 @@ function manterConexao() {
   document.querySelector(".batePapo").classList.remove("escondido");
   setInterval(avaliarConexao, 5000);
   let promise = axios.post("https://mock-api.driven.com.br/api/v6/uol/status", usuario);
-  buscarMensagens();
+  setInterval(buscarMensagens, 3000);
 }
 
 //para ver se o usuario está online
