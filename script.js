@@ -1,20 +1,15 @@
 //entrando no site
 let nomeInserido;
 let usuario;
-let mensagens;
-let nomeMaiusculo;
 
 function entrarChat() {
   const nomeInserido = document.querySelector("input").value;
 
   let usuario = {
-    name: nomeInserido
+    name: nomeInserido,
   };
 
-  const promise = axios.post(
-    "https://mock-api.driven.com.br/api/v6/uol/participants",
-    usuario
-  );
+  const promise = axios.post("https://mock-api.driven.com.br/api/v6/uol/participants", usuario);
   promise.then(manterConexao);
   promise.catch(retornaErro);
 }
@@ -30,51 +25,64 @@ function retornaErro(error) {
 
 //para ver se o usuario esta online e pegar as mensagens
 function manterConexao() {
+  const nomeInserido = document.querySelector("input").value;
+  let usuario = {
+    name: nomeInserido,
+  };
   document.querySelector(".telaEntrada").classList.add("escondido");
   document.querySelector(".batePapo").classList.remove("escondido");
   setInterval(avaliarConexao, 5000);
-  let promise = axios.post(
-    "https://mock-api.driven.com.br/api/v6/uol/status",
-    usuario
-  );
+  let promise = axios.post("https://mock-api.driven.com.br/api/v6/uol/status", usuario);
   buscarMensagens();
 }
 
 //para ver se o usuario está online
 function avaliarConexao() {
-  let promise = axios.post(
-    "https://mock-api.driven.com.br/api/v6/uol/status",
-    usuario
-  );
+  const nomeInserido = document.querySelector("input").value;
+  let usuario = {
+    name: nomeInserido,
+  };
+  let promise = axios.post("https://mock-api.driven.com.br/api/v6/uol/status", usuario);
 }
 
 //para pegar as mensagens do servidor
-function buscarMensagens(resposta) {
-  const promise = axios.get(
-    "https://mock-api.driven.com.br/api/v6/uol/messages"
-  );
+function buscarMensagens() {
+  const promise = axios.get("https://mock-api.driven.com.br/api/v6/uol/messages");
   promise.then(popularMensagens);
+}
+
+let mensagens;
+function popularMensagens(resposta) {
+  console.log(resposta);
   if (resposta.status === 200) {
-    mensagens = resposta.data;
   }
+  mensagens = resposta.data;
   renderizarMensagens();
 }
 
 //para colocar as mensagens do servidos no DOM
 function renderizarMensagens() {
-  const divMensagens = document.querySelector(".mensagens");
+  const divMensagens = document.querySelector(".mensagensRenderizadas");
   divMensagens.innerHTML = "";
 
-  if (mensagens.type === status) {
-    divMensagens.querySelector(".msg-status");
-    let msgStatus = `(${mensagem.time}) <strong>${mensagem.name}<strong> entra na sala`;
+  for (const item of mensagens) {
+    if (item.type === "status") {
+      let msgStatus = `<div class="msg-status">(${item.time}) <strong>${item.from}</strong> entra na sala</div>`;
+      divMensagens.innerHTML += msgStatus;
+    }
+
+    if (item.type === "message") {
+      let msgNormal = `<div class="msg-normal">(${item.time}) <strong>${item.from}</strong> para <strong>${item.to}</strong>: ${item.text}</div>`;
+      divMensagens.innerHTML += msgNormal;
+    }
+
+    if (item.type === "private_message") {
+      let msgReservada = `<div class="msg-reservada">(${item.time}) <strong>${item.from}</strong> reservadamente para <strong>${item.to}</strong>: ${item.text}</div>`;
+      divMensagens.innerHTML += msgReservada;
+    }
   }
-  if (mensagens.type === message) {
-    divMensagens.querySelector(".msg-normal");
-    let msgNormal = `(${mensagem.time}) <strong>${mensagem.name}<strong> para <strong>${mensagem.to}<strong>: ${mensagem.text}`;
-  }
-  if (mensagens.type === private_message) {
-    divMensagens.querySelector(".msg-reservada");
-    let msgReservada = `(${mensagem.time}) <strong>${mensagem.name}<strong> para <strong>${mensagem.to}<strong>: ${mensagem.text}`;
-  }
+}
+
+function enviarMsg() {
+
 }
