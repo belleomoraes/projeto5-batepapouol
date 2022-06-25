@@ -83,6 +83,37 @@ function renderizarMensagens() {
   }
 }
 
-function enviarMsg() {
+function enviarMsg(elemento) {
+  const nomeInserido = document.querySelector("input").value;
+  const textoEnviado = document.querySelector(".digitar-msg input").value;
+  
+  let msgEnviada = {
+    from: nomeInserido,
+    to: "Todos",
+    text: textoEnviado,
+    type: "message"
+  }
 
+  console.log(msgEnviada)
+  let promise = axios.post("https://mock-api.driven.com.br/api/v6/uol/messages", msgEnviada);
+  promise.then(postarMsg);
 }
+
+function postarMsg() {
+  const nomeInserido = document.querySelector("input").value;
+  const textoEnviado = document.querySelector(".digitar-msg input").value;
+  
+  let msgEnviada = {
+    from: nomeInserido,
+    to: "Todos",
+    text: textoEnviado,
+    type: "message"
+  }
+
+  let mensagemUsuario = `<div class="msg-normal"><strong>${msgEnviada.from}</strong> para <strong>${msgEnviada.to}</strong>: ${msgEnviada.text}</div>`;
+
+  console.log("entrou na funcao")
+  document.querySelector(".mensagensRenderizadas").innerHTML += mensagemUsuario
+}
+
+
