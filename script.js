@@ -62,6 +62,16 @@ function popularMensagens(resposta) {
 
 //para colocar as mensagens do servidos no DOM
 function renderizarMensagens() {
+  const nomeInserido = document.querySelector("input").value;
+  const textoEnviado = document.querySelector(".digitar-msg input").value;
+
+  let msgEnviada = {
+    from: nomeInserido,
+    to: "Todos",
+    text: textoEnviado,
+    type: "message",
+  };
+
   const divMensagens = document.querySelector(".mensagensRenderizadas");
   divMensagens.innerHTML = "";
 
@@ -76,44 +86,46 @@ function renderizarMensagens() {
       divMensagens.innerHTML += msgNormal;
     }
 
-    if (item.type === "private_message") {
+    if (item.type === "private_message" && msgEnviada.from === nomeInserido) {
       let msgReservada = `<div class="msg-reservada">(${item.time}) <strong>${item.from}</strong> reservadamente para <strong>${item.to}</strong>: ${item.text}</div>`;
       divMensagens.innerHTML += msgReservada;
     }
+    //TENTANDO O SCROLL!
+    const ultimaMensagem = document.querySelector(".mensagensRenderizadas .lastchild")
+    ultimaMensagem.scrollIntoView();
   }
 }
 
 function enviarMsg(elemento) {
   const nomeInserido = document.querySelector("input").value;
   const textoEnviado = document.querySelector(".digitar-msg input").value;
-  
+
   let msgEnviada = {
     from: nomeInserido,
     to: "Todos",
     text: textoEnviado,
-    type: "message"
-  }
+    type: "message",
+  };
 
-  console.log(msgEnviada)
+  console.log(msgEnviada);
   let promise = axios.post("https://mock-api.driven.com.br/api/v6/uol/messages", msgEnviada);
   promise.then(postarMsg);
 }
 
 function postarMsg() {
   const nomeInserido = document.querySelector("input").value;
-  const textoEnviado = document.querySelector(".digitar-msg input").value;
-  
+  let textoEnviado = document.querySelector(".digitar-msg input").value;
+
   let msgEnviada = {
     from: nomeInserido,
     to: "Todos",
     text: textoEnviado,
-    type: "message"
-  }
+    type: "message",
+  };
 
   let mensagemUsuario = `<div class="msg-normal"><strong>${msgEnviada.from}</strong> para <strong>${msgEnviada.to}</strong>: ${msgEnviada.text}</div>`;
 
-  console.log("entrou na funcao")
-  document.querySelector(".mensagensRenderizadas").innerHTML += mensagemUsuario
+  console.log("entrou na funcao");
+  document.querySelector(".mensagensRenderizadas").innerHTML += mensagemUsuario;
+  document.querySelector(".digitar-msg input").value = "";
 }
-
-
