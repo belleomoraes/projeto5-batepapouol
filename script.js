@@ -92,20 +92,6 @@ function renderizarMensagens() {
   }
 }
 
-
-//para ver se outros participantes do chat estao online
-function conexaoParticipantes() {
-  const participante = mensagens.from;
-  let promise = axios.post("https://mock-api.driven.com.br/api/v6/uol/status", participante);
-  for (const item of mensagens) {
-    if (!promise) {
-      let msgSaiu = `<div class="msg-status">(${item.time}) <strong>${item.from}</strong> saiu da sala</div>`;
-      divMensagens.innerHTML += msgSaiu;
-    }
-    return
-}
-}
-
 function enviarMsg(elemento) {
   const nomeInserido = document.querySelector("input").value;
   const textoEnviado = document.querySelector(".digitar-msg input").value;
