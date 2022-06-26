@@ -57,7 +57,6 @@ function popularMensagens(resposta) {
   if (resposta.status === 200) {
   }
   mensagens = resposta.data;
-  console.log(mensagens);
   renderizarMensagens();
 }
 
