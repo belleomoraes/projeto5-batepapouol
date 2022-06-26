@@ -45,6 +45,12 @@ function avaliarConexao() {
   let promise = axios.post("https://mock-api.driven.com.br/api/v6/uol/status", usuario);
 }
 
+//para ver se outros participantes do chat estao online
+function conexaoParticipantes() {
+  mensagens = resposta.data; 
+
+
+}
 //para pegar as mensagens do servidor
 function buscarMensagens() {
   const promise = axios.get("https://mock-api.driven.com.br/api/v6/uol/messages");
@@ -61,20 +67,12 @@ function popularMensagens(resposta) {
 }
 
 //para colocar as mensagens do servidos no DOM
+
 function renderizarMensagens() {
-  const nomeInserido = document.querySelector("input").value;
-  const textoEnviado = document.querySelector(".digitar-msg input").value;
-
-  let msgEnviada = {
-    from: nomeInserido,
-    to: "Todos",
-    text: textoEnviado,
-    type: "message",
-  };
-
+  
   const divMensagens = document.querySelector(".mensagensRenderizadas");
   divMensagens.innerHTML = "";
-
+  
   for (const item of mensagens) {
     if (item.type === "status") {
       let msgStatus = `<div class="msg-status">(${item.time}) <strong>${item.from}</strong> entra na sala</div>`;
@@ -86,14 +84,13 @@ function renderizarMensagens() {
       divMensagens.innerHTML += msgNormal;
     }
 
-    if (item.type === "private_message" && msgEnviada.from === nomeInserido) {
+    if (item.type === "private_message") {
       let msgReservada = `<div class="msg-reservada">(${item.time}) <strong>${item.from}</strong> reservadamente para <strong>${item.to}</strong>: ${item.text}</div>`;
       divMensagens.innerHTML += msgReservada;
     }
-    //TENTANDO O SCROLL!
-    const ultimaMensagem = document.querySelector(".mensagensRenderizadas .lastchild")
-    ultimaMensagem.scrollIntoView();
+
   }
+  document.querySelector(".mensagensRenderizadas").lastChild.scrollIntoView();
 }
 
 function enviarMsg(elemento) {
