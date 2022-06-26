@@ -57,6 +57,7 @@ function popularMensagens(resposta) {
   if (resposta.status === 200) {
   }
   mensagens = resposta.data;
+  console.log(mensagens);
   renderizarMensagens();
 }
 
@@ -70,8 +71,13 @@ function renderizarMensagens() {
   
   for (const item of mensagens) {
     if (item.type === "status") {
+      if (item.text === "entra na sala...") {
       let msgStatus = `<div class="msg-status">(${item.time}) <strong>${item.from}</strong> entra na sala</div>`;
       divMensagens.innerHTML += msgStatus;}
+      if (item.text === "sai da sala...") {
+        let msgStatus = `<div class="msg-status">(${item.time}) <strong>${item.from}</strong> sai da sala</div>`;
+      divMensagens.innerHTML += msgStatus;}
+      }
     
     if (item.type === "message") {
       let msgNormal = `<div class="msg-normal">(${item.time}) <strong>${item.from}</strong> para <strong>${item.to}</strong>: ${item.text}</div>`;
@@ -82,9 +88,10 @@ function renderizarMensagens() {
       let msgReservada = `<div class="msg-reservada">(${item.time}) <strong>${item.from}</strong> reservadamente para <strong>${item.to}</strong>: ${item.text}</div>`;
       divMensagens.innerHTML += msgReservada;
     }
+    document.querySelector(".mensagensRenderizadas").lastChild.scrollIntoView();
   }
-  document.querySelector(".mensagensRenderizadas").lastChild.scrollIntoView();
 }
+
 
 //para ver se outros participantes do chat estao online
 function conexaoParticipantes() {
